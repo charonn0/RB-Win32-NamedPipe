@@ -1,5 +1,5 @@
 #tag Class
-Protected Class FileStream
+Protected Class IOStream
 Implements Readable,Writeable
 	#tag Method, Flags = &h0
 		Sub Close()
@@ -15,28 +15,66 @@ Implements Readable,Writeable
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		 Shared Function Create(Target As FolderItem, CreateDisposition As Integer = 0, Access As Integer = 0, Sharemode As Integer = 0, Flags As Integer = 0) As Win32.FileStream
+		 Shared Function CreateFileItem(Target As String, CreateDisposition As Integer = 0, Access As Integer = 0, Sharemode As Integer = 0, Flags As Integer = 0) As Win32.FileItem
 		  'This function accepts parameters corresponding to those of the CreateFile() Win32 function.
-		  'Returns a new instance of Win32.FileStream. Check the returned FileStream's LastError value
+		  'Returns a new instance of Win32.IOStream. Check the returned IOStream's LastError value
 		  'to determine whether the file was opened successfully.
 		  
-		  Dim tmp As Win32.FileStream = New Win32.FileStream(INVALID_HANDLE_VALUE)
+		  Dim tmp As Win32.FileItem = New Win32.FileItem(INVALID_HANDLE_VALUE)
 		  Dim hFile As Integer
 		  
 		  If Access = 0 Then Access = GENERIC_ALL
 		  If CreateDisposition = 0 Then CreateDisposition = OPEN_EXISTING
 		  If sharemode = 0 Then sharemode = FILE_SHARE_READ 'exclusive write access
 		  
-		  hFile = CreateFile(Target.AbsolutePath, Access, sharemode, 0, CreateDisposition, Flags, 0)
+		  hFile = CreateFile("//?/" + ReplaceAll(Target, "/", "//"), Access, sharemode, 0, CreateDisposition, Flags, 0)
 		  
 		  If hFile <> INVALID_HANDLE_VALUE Then
-		    tmp = New Win32.FileStream(hFile)
+		    tmp = New Win32.FileItem(hFile)
 		    tmp.LastError = 0
 		  Else
 		    tmp.LastError = GetLastError()
 		  End If
 		  
 		  Return tmp
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		 Shared Function CreateFileStream(Target As String, CreateDisposition As Integer = 0, Access As Integer = 0, Sharemode As Integer = 0, Flags As Integer = 0) As Win32.IOStream
+		  'This function accepts parameters corresponding to those of the CreateFile() Win32 function.
+		  'Returns a new instance of Win32.IOStream. Check the returned IOStream's LastError value
+		  'to determine whether the file was opened successfully.
+		  
+		  Dim tmp As Win32.IOStream = New Win32.IOStream(INVALID_HANDLE_VALUE)
+		  Dim hFile As Integer
+		  
+		  If Access = 0 Then Access = GENERIC_ALL
+		  If CreateDisposition = 0 Then CreateDisposition = OPEN_EXISTING
+		  If sharemode = 0 Then sharemode = FILE_SHARE_READ 'exclusive write access
+		  
+		  hFile = CreateFile("//?/" + ReplaceAll(Target, "/", "//"), Access, sharemode, 0, CreateDisposition, Flags, 0)
+		  
+		  If hFile <> INVALID_HANDLE_VALUE Then
+		    tmp = New Win32.IOStream(hFile)
+		    tmp.LastError = 0
+		  Else
+		    tmp.LastError = GetLastError()
+		  End If
+		  
+		  Return tmp
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		 Shared Function CreateNamedPipe(PipeName As String, OpenMode As Integer, MaxInstances As Integer = - 1, OutBufferSize As Integer = 512, InBufferSize As Integer = 512, DefaultTimeout As Integer = -1, PipeMode As Integer = 0) As Win32.IOStream
+		  Dim err As Integer
+		  If MaxInstances = -1 Then MaxInstances = PIPE_UNLIMITED_INSTANCES
+		  Dim i As Integer = CreateNamedPipe("\\.\pipe\" + PipeName, OpenMode, PipeMode, MaxInstances, OutBufferSize, InBufferSize, DefaultTimeout, Nil)
+		  err = GetLastError()
+		  Dim np As New Win32.IOStream(i)
+		  np.LastError = err
+		  Return np
 		End Function
 	#tag EndMethod
 
@@ -67,7 +105,7 @@ Implements Readable,Writeable
 
 	#tag Method, Flags = &h0
 		Function Operator_Convert() As BinaryStream
-		  'Be aware that calling the Close method on either this instance of Win32.FileStream or the
+		  'Be aware that calling the Close method on either this instance of Win32.IOStream or the
 		  'returned BinaryStream will close both.
 		  Return New BinaryStream(Me.Handle, BinaryStream.HandleTypeWin32Handle)
 		End Function
