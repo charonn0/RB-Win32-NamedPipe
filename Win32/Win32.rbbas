@@ -5,6 +5,10 @@ Protected Module Win32
 	#tag EndExternalMethod
 
 	#tag ExternalMethod, Flags = &h1
+		Protected Declare Function ConnectNamedPipe Lib "Kernel32" (hPipe As Integer, Overlapped As Ptr) As Boolean
+	#tag EndExternalMethod
+
+	#tag ExternalMethod, Flags = &h1
 		Protected Declare Function CopyFileEx Lib "Kernel32" Alias "CopyFileExW" (sourceFile As WString, destinationFile As WString, FailIfExists As Boolean) As Boolean
 	#tag EndExternalMethod
 

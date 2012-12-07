@@ -8,36 +8,22 @@ Implements Readable,Writeable
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
+		 Shared Function ConnectPipe(PipeName As String) As Win32.IOStream
+		  Dim err As Integer
+		  Dim hFile As Integer = Win32.CreateFile("\\.\pipe\" + PipeName, Win32.GENERIC_READ Or Win32.GENERIC_WRITE, 0, 0, Win32.OPEN_EXISTING, 0, 0)
+		  err = Win32.GetLastError()
+		  Dim stream As New Win32.IOStream(hFile)
+		  stream.LastError = err
+		  
+		  Return stream
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Sub Constructor(FileHandle As Integer)
 		  #If Not TargetWin32 Then #pragma Error "This class is for Windows only."
 		  Me.mHandle = FileHandle
 		End Sub
-	#tag EndMethod
-
-	#tag Method, Flags = &h0
-		 Shared Function CreateFileItem(Target As String, CreateDisposition As Integer = 0, Access As Integer = 0, Sharemode As Integer = 0, Flags As Integer = 0) As Win32.FileItem
-		  'This function accepts parameters corresponding to those of the CreateFile() Win32 function.
-		  'Returns a new instance of Win32.IOStream. Check the returned IOStream's LastError value
-		  'to determine whether the file was opened successfully.
-		  
-		  Dim tmp As Win32.FileItem = New Win32.FileItem(INVALID_HANDLE_VALUE)
-		  Dim hFile As Integer
-		  
-		  If Access = 0 Then Access = GENERIC_ALL
-		  If CreateDisposition = 0 Then CreateDisposition = OPEN_EXISTING
-		  If sharemode = 0 Then sharemode = FILE_SHARE_READ 'exclusive write access
-		  
-		  hFile = CreateFile("//?/" + ReplaceAll(Target, "/", "//"), Access, sharemode, 0, CreateDisposition, Flags, 0)
-		  
-		  If hFile <> INVALID_HANDLE_VALUE Then
-		    tmp = New Win32.FileItem(hFile)
-		    tmp.LastError = 0
-		  Else
-		    tmp.LastError = GetLastError()
-		  End If
-		  
-		  Return tmp
-		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
@@ -67,13 +53,18 @@ Implements Readable,Writeable
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		 Shared Function CreateNamedPipe(PipeName As String, OpenMode As Integer, MaxInstances As Integer = -1, OutBufferSize As Integer = 512, InBufferSize As Integer = 512, DefaultTimeout As Integer = -1, PipeMode As Integer = 0) As Win32.IOStream
+		 Shared Function CreateNamedPipe(PipeName As String, OpenMode As Integer, MaxInstances As Integer = - 1, OutBufferSize As Integer = 512, InBufferSize As Integer = 512, DefaultTimeout As Integer = - 1, PipeMode As Integer = 0) As Win32.IOStream
 		  Dim err As Integer
 		  If MaxInstances = -1 Then MaxInstances = PIPE_UNLIMITED_INSTANCES
 		  Dim i As Integer = Win32.CreateNamedPipe("\\.\pipe\" + PipeName, OpenMode, PipeMode, MaxInstances, OutBufferSize, InBufferSize, DefaultTimeout, Nil)
 		  err = GetLastError()
 		  Dim np As New Win32.IOStream(i)
 		  np.LastError = err
+		  If Win32.ConnectNamedPipe(np.Handle, Nil) Then 'ConnectNamedPipe blocks until a client connects (TODO: async mode)
+		    np.LastError = 0
+		  Else
+		    np.LastError = Win32.GetLastError()
+		  End If
 		  Return np
 		End Function
 	#tag EndMethod
@@ -202,8 +193,8 @@ Implements Readable,Writeable
 		Length As Integer
 	#tag EndComputedProperty
 
-	#tag Property, Flags = &h21
-		Private mHandle As Integer
+	#tag Property, Flags = &h1
+		Protected mHandle As Integer
 	#tag EndProperty
 
 	#tag ComputedProperty, Flags = &h0

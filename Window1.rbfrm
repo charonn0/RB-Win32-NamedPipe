@@ -7,7 +7,7 @@ Begin Window Window1
    Frame           =   0
    FullScreen      =   False
    HasBackColor    =   False
-   Height          =   400
+   Height          =   3.54e+2
    ImplicitInstance=   True
    LiveResize      =   True
    MacProcID       =   0
@@ -23,7 +23,7 @@ Begin Window Window1
    Resizeable      =   True
    Title           =   "Untitled"
    Visible         =   True
-   Width           =   600
+   Width           =   3.37e+2
    Begin PushButton PushButton1
       AutoDeactivate  =   True
       Bold            =   ""
@@ -37,7 +37,7 @@ Begin Window Window1
       Index           =   -2147483648
       InitialParent   =   ""
       Italic          =   ""
-      Left            =   81
+      Left            =   10
       LockBottom      =   ""
       LockedInPosition=   False
       LockLeft        =   True
@@ -50,7 +50,7 @@ Begin Window Window1
       TextFont        =   "System"
       TextSize        =   0
       TextUnit        =   0
-      Top             =   68
+      Top             =   84
       Underline       =   ""
       Visible         =   True
       Width           =   80
@@ -68,7 +68,7 @@ Begin Window Window1
       Index           =   -2147483648
       InitialParent   =   ""
       Italic          =   ""
-      Left            =   81
+      Left            =   10
       LockBottom      =   ""
       LockedInPosition=   False
       LockLeft        =   True
@@ -81,12 +81,12 @@ Begin Window Window1
       TextFont        =   "System"
       TextSize        =   0
       TextUnit        =   0
-      Top             =   102
+      Top             =   118
       Underline       =   ""
       Visible         =   True
       Width           =   80
    End
-   Begin TextArea TextArea1
+   Begin TextArea servertext
       AcceptTabs      =   ""
       Alignment       =   0
       AutoDeactivate  =   True
@@ -103,7 +103,7 @@ Begin Window Window1
       HideSelection   =   True
       Index           =   -2147483648
       Italic          =   ""
-      Left            =   200
+      Left            =   102
       LimitText       =   0
       LockBottom      =   ""
       LockedInPosition=   False
@@ -131,7 +131,69 @@ Begin Window Window1
       Visible         =   True
       Width           =   200
    End
-   Begin PushButton PushButton3
+   Begin PushButton PushButton4
+      AutoDeactivate  =   True
+      Bold            =   ""
+      ButtonStyle     =   0
+      Cancel          =   ""
+      Caption         =   "Create Server"
+      Default         =   ""
+      Enabled         =   True
+      Height          =   22
+      HelpTag         =   ""
+      Index           =   -2147483648
+      InitialParent   =   ""
+      Italic          =   ""
+      Left            =   10
+      LockBottom      =   ""
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   ""
+      LockTop         =   True
+      Scope           =   0
+      TabIndex        =   4
+      TabPanelIndex   =   0
+      TabStop         =   True
+      TextFont        =   "System"
+      TextSize        =   0
+      TextUnit        =   0
+      Top             =   50
+      Underline       =   ""
+      Visible         =   True
+      Width           =   80
+   End
+   Begin PushButton PushButton5
+      AutoDeactivate  =   True
+      Bold            =   ""
+      ButtonStyle     =   0
+      Cancel          =   ""
+      Caption         =   "Create Client"
+      Default         =   ""
+      Enabled         =   True
+      Height          =   22
+      HelpTag         =   ""
+      Index           =   -2147483648
+      InitialParent   =   ""
+      Italic          =   ""
+      Left            =   10
+      LockBottom      =   ""
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   ""
+      LockTop         =   True
+      Scope           =   0
+      TabIndex        =   5
+      TabPanelIndex   =   0
+      TabStop         =   True
+      TextFont        =   "System"
+      TextSize        =   0
+      TextUnit        =   0
+      Top             =   205
+      Underline       =   ""
+      Visible         =   True
+      Width           =   80
+   End
+   Begin PushButton PushButton6
       AutoDeactivate  =   True
       Bold            =   ""
       ButtonStyle     =   0
@@ -144,20 +206,96 @@ Begin Window Window1
       Index           =   -2147483648
       InitialParent   =   ""
       Italic          =   ""
-      Left            =   75
+      Left            =   10
       LockBottom      =   ""
       LockedInPosition=   False
       LockLeft        =   True
       LockRight       =   ""
       LockTop         =   True
       Scope           =   0
-      TabIndex        =   3
+      TabIndex        =   6
       TabPanelIndex   =   0
       TabStop         =   True
       TextFont        =   "System"
       TextSize        =   0
       TextUnit        =   0
-      Top             =   218
+      Top             =   273
+      Underline       =   ""
+      Visible         =   True
+      Width           =   80
+   End
+   Begin TextArea clienttext
+      AcceptTabs      =   ""
+      Alignment       =   0
+      AutoDeactivate  =   True
+      AutomaticallyCheckSpelling=   True
+      BackColor       =   &hFFFFFF
+      Bold            =   ""
+      Border          =   True
+      DataField       =   ""
+      DataSource      =   ""
+      Enabled         =   True
+      Format          =   ""
+      Height          =   100
+      HelpTag         =   ""
+      HideSelection   =   True
+      Index           =   -2147483648
+      Italic          =   ""
+      Left            =   102
+      LimitText       =   0
+      LockBottom      =   ""
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   ""
+      LockTop         =   True
+      Mask            =   ""
+      Multiline       =   True
+      ReadOnly        =   ""
+      Scope           =   0
+      ScrollbarHorizontal=   ""
+      ScrollbarVertical=   True
+      Styled          =   True
+      TabIndex        =   7
+      TabPanelIndex   =   0
+      TabStop         =   True
+      Text            =   ""
+      TextColor       =   &h000000
+      TextFont        =   "System"
+      TextSize        =   0
+      TextUnit        =   0
+      Top             =   204
+      Underline       =   ""
+      UseFocusRing    =   True
+      Visible         =   True
+      Width           =   200
+   End
+   Begin PushButton PushButton7
+      AutoDeactivate  =   True
+      Bold            =   ""
+      ButtonStyle     =   0
+      Cancel          =   ""
+      Caption         =   "Write"
+      Default         =   ""
+      Enabled         =   True
+      Height          =   22
+      HelpTag         =   ""
+      Index           =   -2147483648
+      InitialParent   =   ""
+      Italic          =   ""
+      Left            =   10
+      LockBottom      =   ""
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   ""
+      LockTop         =   True
+      Scope           =   0
+      TabIndex        =   8
+      TabPanelIndex   =   0
+      TabStop         =   True
+      TextFont        =   "System"
+      TextSize        =   0
+      TextUnit        =   0
+      Top             =   239
       Underline       =   ""
       Visible         =   True
       Width           =   80
@@ -166,41 +304,13 @@ End
 #tag EndWindow
 
 #tag WindowCode
-	#tag Event
-		Sub Open()
-		  'Dim s As Win32.IOStream
-		  'Dim f As FolderItem = GetFolderItem("C:\Users\Andrew\Desktop\test.txt")
-		  's = Win32.IOStream.Create(f, Win32.CREATE_NEW)
-		  'If s.LastError = 0 Then
-		  'For i As Integer = 0 To 100
-		  's.Write("Hello, world! " + Str(i))
-		  'Next
-		  'Dim i As Integer = s.Length
-		  's.Length = s.Length * 2
-		  's.Position = 0
-		  'Dim y As String = s.Read(i)
-		  's.Close
-		  'Break
-		  'Else
-		  'Break
-		  'End If
-		  
-		  'Dim start1, start2, end1, end2, time1, time2 As UInt64
-		  '
-		  'start1 = Microseconds
-		  'Dim f As New FolderItem
-		  'end1 = Microseconds
-		  '
-		  'start2 = Microseconds
-		  'Dim g As New Win32File.FileInstance("C:\WINDOWS\..\")
-		  'end2 = Microseconds
-		  '
-		  'time1 = end1 - start1
-		  'time2 = end2 - start2
-		  'Quit
-		  
-		End Sub
-	#tag EndEvent
+	#tag Property, Flags = &h0
+		Client As Win32.IOStream
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
+		Server As Win32.IOStream
+	#tag EndProperty
 
 
 #tag EndWindowCode
@@ -208,31 +318,47 @@ End
 #tag Events PushButton1
 	#tag Event
 		Sub Action()
-		  Dim p As Win32.IOStream = Win32.IOStream.CreateNamedPipe("BSTEST", Win32.PIPE_ACCESS_OUTBOUND)
-		  p.Write("Hello, world!")
-		  p.Flush
-		  
+		  Self.Server.Write(servertext.Text)
 		End Sub
 	#tag EndEvent
 #tag EndEvents
 #tag Events PushButton2
 	#tag Event
 		Sub Action()
-		  Dim p As Win32.IOStream = Win32.IOStream.CreateNamedPipe("BSTEST", Win32.PIPE_ACCESS_INBOUND)
-		  Dim s As String = p.Read(32)
+		  Dim s As String = Self.Server.Read(24)
 		  Break
+		  servertext.AppendText(s)
 		End Sub
 	#tag EndEvent
 #tag EndEvents
-#tag Events PushButton3
+#tag Events PushButton4
 	#tag Event
 		Sub Action()
-		  Dim p As Win32.FileItem = Win32.IOStream.CreateFileItem("L:\Videos\Cara Minecraft—the Turret Opera in Minecraft (Note Blocks).flv", Win32.OPEN_EXISTING, Win32.GENERIC_READ, Win32.FILE_SHARE_READ Or Win32.FILE_SHARE_WRITE Or Win32.FILE_SHARE_DELETE, 0)
-		  If p.Exists Then
-		    Break
-		  Else
-		    Break
-		  End If
+		  Self.Server = Win32.IOStream.CreateNamedPipe("BSTEST", Win32.PIPE_ACCESS_DUPLEX)
+		  
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events PushButton5
+	#tag Event
+		Sub Action()
+		  Self.Client = Win32.IOStream.ConnectPipe("BSTEST")
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events PushButton6
+	#tag Event
+		Sub Action()
+		  Dim s As String = Self.Client.Read(24)
+		  Break
+		  clienttext.AppendText(s)
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events PushButton7
+	#tag Event
+		Sub Action()
+		  Self.Client.Write(clienttext.Text)
 		End Sub
 	#tag EndEvent
 #tag EndEvents
