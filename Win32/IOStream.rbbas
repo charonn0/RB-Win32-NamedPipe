@@ -67,10 +67,10 @@ Implements Readable,Writeable
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		 Shared Function CreateNamedPipe(PipeName As String, OpenMode As Integer, MaxInstances As Integer = - 1, OutBufferSize As Integer = 512, InBufferSize As Integer = 512, DefaultTimeout As Integer = -1, PipeMode As Integer = 0) As Win32.IOStream
+		 Shared Function CreateNamedPipe(PipeName As String, OpenMode As Integer, MaxInstances As Integer = -1, OutBufferSize As Integer = 512, InBufferSize As Integer = 512, DefaultTimeout As Integer = -1, PipeMode As Integer = 0) As Win32.IOStream
 		  Dim err As Integer
 		  If MaxInstances = -1 Then MaxInstances = PIPE_UNLIMITED_INSTANCES
-		  Dim i As Integer = CreateNamedPipe("\\.\pipe\" + PipeName, OpenMode, PipeMode, MaxInstances, OutBufferSize, InBufferSize, DefaultTimeout, Nil)
+		  Dim i As Integer = Win32.CreateNamedPipe("\\.\pipe\" + PipeName, OpenMode, PipeMode, MaxInstances, OutBufferSize, InBufferSize, DefaultTimeout, Nil)
 		  err = GetLastError()
 		  Dim np As New Win32.IOStream(i)
 		  np.LastError = err
