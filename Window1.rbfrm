@@ -188,7 +188,7 @@ Begin Window Window1
       TextFont        =   "System"
       TextSize        =   0
       TextUnit        =   0
-      Top             =   205
+      Top             =   203
       Underline       =   ""
       Visible         =   True
       Width           =   80
@@ -305,11 +305,11 @@ End
 
 #tag WindowCode
 	#tag Property, Flags = &h0
-		Client As Win32.IOStream
+		Client As BinaryStream
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
-		Server As Win32.IOStream
+		Server As BinaryStream
 	#tag EndProperty
 
 
@@ -334,7 +334,7 @@ End
 #tag Events PushButton4
 	#tag Event
 		Sub Action()
-		  Self.Server = Win32.IOStream.CreateNamedPipe("BSTEST", Win32.PIPE_ACCESS_DUPLEX)
+		  Self.Server = Win32.CreateNamedPipe("BSTEST", Win32.PIPE_ACCESS_DUPLEX)
 		  
 		End Sub
 	#tag EndEvent
@@ -342,7 +342,7 @@ End
 #tag Events PushButton5
 	#tag Event
 		Sub Action()
-		  Self.Client = Win32.IOStream.ConnectPipe("BSTEST")
+		  Self.Client = Win32.ConnectNamedPipe("BSTEST")
 		End Sub
 	#tag EndEvent
 #tag EndEvents
